@@ -1,21 +1,27 @@
-﻿using TaskManager.Application.Repository;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.EntityFrameworkCore;
+using TaskManager.Application.Repository;
 using TaskManager.Domain.Entities;
+using TaskManager.Infrastructure.Data;
 
 namespace TaskManager.Infrastructure.Repositories
 {
     public class TaskRepository : ITaskRepository
     {
-        private static List<TaskItem> _tasks = new List<TaskItem>();
-    
-            public Task<List<TaskItem>> GetAllTasksAsync()
-            {
-                return Task.FromResult(_tasks);
-            }
-    
-            public Task AddTaskAsync(TaskItem task)
-            {
-                _tasks.Add(task);
-                return Task.CompletedTask;
+        private readonly ApplicationDbContext _context;
+
+        public TaskRepository(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+        public async Task<List<TaskItem>> GetAllTasksAsync()
+        {
+            return await _context.Tasks.ToListAsync();
+        }
+        public async Task AddTaskAsync(TaskItem task)
+        {
+            await _context.AddAsync(task);
+            await _context.SaveChangesAsync();
         }
     }
 }

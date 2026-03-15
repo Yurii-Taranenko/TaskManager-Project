@@ -2,6 +2,7 @@
 using TaskManager.Application.DTO;
 using TaskManager.Application.Repository;
 using TaskManager.Domain.Entities;
+using TaskManager.Domain.Enums;
 using TaskManager.Infrastructure.Repositories;
 
 namespace TaskManager.Controllers
@@ -26,7 +27,7 @@ namespace TaskManager.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateTask(CreateTaskRequest request)
         {
-            TaskItem newItem = new TaskItem(request.Title);
+            TaskItem newItem = new TaskItem(request.Title, request.Description, request.DueDate, request.Priority);
             
             await _repository.AddTaskAsync(newItem);
 
