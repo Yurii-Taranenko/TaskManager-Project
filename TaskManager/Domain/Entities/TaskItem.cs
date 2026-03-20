@@ -1,4 +1,5 @@
 ﻿using TaskManager.Domain.Enums;
+using TaskManager.Domain.Exceptions;
 
 namespace TaskManager.Domain.Entities
 {
@@ -18,10 +19,10 @@ namespace TaskManager.Domain.Entities
         {
             // Domain validation
             if (string.IsNullOrWhiteSpace(title))
-                throw new ArgumentException("Title cannot be empty.", nameof(title));
+                throw new DomainException("Title cannot be empty.");
             
             if (title.Length > 100)
-                throw new ArgumentException("Title must be less than 100 characters.", nameof(title));
+                throw new DomainException("Title must be less than 100 characters.");
 
             Id = Guid.NewGuid();
             IsCompleted = false;
@@ -60,7 +61,7 @@ namespace TaskManager.Domain.Entities
         public void SetComplete()
         {
             if (IsCompleted)
-                throw new Exception("Task is already completed.");
+                throw new DomainException("Task is already completed.");
 
             IsCompleted = true;
         }
@@ -68,7 +69,7 @@ namespace TaskManager.Domain.Entities
         public void SetIncomplete()
         {
             if (!IsCompleted)
-                throw new Exception("Task is already incomplete.");
+                throw new DomainException("Task is already incomplete.");
             IsCompleted = false;
         }
     }
