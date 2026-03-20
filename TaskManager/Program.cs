@@ -18,7 +18,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddFluentValidationAutoValidation();
-builder.Services.AddValidatorsFromAssemblyContaining<CreateTaskRequestValidation>();
+builder.Services.AddValidatorsFromAssemblyContaining<UpdateTaskRequestValidation>();
 
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>

@@ -3,17 +3,18 @@ using TaskManager.Application.DTO;
 
 namespace TaskManager.Application.Validation
 {
-    public class CreateTaskRequestValidation : AbstractValidator<CreateTaskRequest>
+    public class UpdateTaskRequestValidation : AbstractValidator<UpdateTaskRequest>
     {
-        public CreateTaskRequestValidation() 
+        public UpdateTaskRequestValidation() 
         {
             RuleFor(x => x.Title)
                 .MaximumLength(100).WithMessage("Title must be less than 100 characters.")
-                .NotEmpty().WithMessage("Title is required.");
+                .When(x => !string.IsNullOrEmpty(x.Title));
 
             RuleFor(x => x.Description)
-                .MaximumLength(1000).WithMessage("Maximum length is 1000");
-            
+                .MaximumLength(1000).WithMessage("Maximum length is 1000")
+                .When(x => !string.IsNullOrEmpty(x.Title));
+
             RuleFor(x => x.DueDate)
                 .GreaterThan(DateTime.UtcNow).WithMessage("Due date must be in the future.")
                 .When(x => x.DueDate.HasValue);
