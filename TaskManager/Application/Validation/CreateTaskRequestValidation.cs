@@ -8,12 +8,13 @@ namespace TaskManager.Application.Validation
         public CreateTaskRequestValidation() 
         {
             RuleFor(x => x.Title)
-                .MaximumLength(100).WithMessage("Title must be less than 100 characters.")
-                .NotEmpty().WithMessage("Title is required.");
+                .NotEmpty().WithMessage("Title is required.")
+                .MaximumLength(100).WithMessage("Title must be less than 100 characters.");
 
             RuleFor(x => x.Description)
-                .MaximumLength(1000).WithMessage("Maximum length is 1000");
-            
+                .MaximumLength(1000).WithMessage("Maximum length is 1000")
+                .When(x => !string.IsNullOrEmpty(x.Description));
+
             RuleFor(x => x.DueDate)
                 .GreaterThan(DateTime.UtcNow).WithMessage("Due date must be in the future.")
                 .When(x => x.DueDate.HasValue);

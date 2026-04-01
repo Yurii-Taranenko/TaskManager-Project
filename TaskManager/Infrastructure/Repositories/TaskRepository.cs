@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using TaskManager.Application.Repository;
 using TaskManager.Domain.Entities;
 using TaskManager.Infrastructure.Data;
 

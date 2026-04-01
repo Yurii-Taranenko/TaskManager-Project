@@ -1,6 +1,6 @@
 ﻿using TaskManager.Domain.Entities;
 
-namespace TaskManager.Application.Repository
+namespace TaskManager.Infrastructure.Repositories
 {
     public interface ITaskRepository
     {

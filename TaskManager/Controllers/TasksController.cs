@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TaskManager.Application.DTO;
-using TaskManager.Application.Repository;
 using TaskManager.Domain.Entities;
 using TaskManager.Domain.Exceptions;
+using TaskManager.Infrastructure.Repositories;
 
 namespace TaskManager.Controllers
 {

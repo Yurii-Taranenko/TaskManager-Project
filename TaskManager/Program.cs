@@ -2,7 +2,6 @@ using System.Text.Json.Serialization;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
-using TaskManager.Application.Repository;
 using TaskManager.Application.Validation;
 using TaskManager.Infrastructure.Data;
 using TaskManager.Infrastructure.Repositories;
